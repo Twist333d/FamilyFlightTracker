@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  title: Flight Information API
+  version: 1.0.0
+paths:
+  /submit_flight:
+    post:
+      summary: Submit flight details
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flight_number:
+                  type: string
+                  pattern: '^[A-Za-z]{2}\d{1,4}$'
+                  example: 'AA123'
+      responses:
+        '200':
+          description: Flight details submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Invalid flight number format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
